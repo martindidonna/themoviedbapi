@@ -11,6 +11,9 @@ public class AlternativeTitle extends AbstractJsonMapping {
     @JsonProperty("title")
     private String title;
 
+    @JsonProperty("type")
+    private String type;
+
 
     public String getCountry() {
         return country;
@@ -31,4 +34,11 @@ public class AlternativeTitle extends AbstractJsonMapping {
         this.title = title;
     }
 
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
 }

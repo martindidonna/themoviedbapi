@@ -1,12 +1,16 @@
 package info.movito.themoviedbapi;
 
+import info.movito.themoviedbapi.model.AlternativeTitle;
 import info.movito.themoviedbapi.model.ContentRating;
 import info.movito.themoviedbapi.model.Credits;
 import info.movito.themoviedbapi.model.MovieImages;
 import info.movito.themoviedbapi.model.config.Timezone;
 import info.movito.themoviedbapi.model.core.TvKeywords;
+import info.movito.themoviedbapi.model.tv.TvAlternativeTitle;
 import info.movito.themoviedbapi.model.tv.TvSeries;
 import info.movito.themoviedbapi.tools.ApiUrl;
+
+import java.util.List;
 
 import static info.movito.themoviedbapi.Utils.asStringArray;
 
@@ -24,7 +28,7 @@ public class TmdbTV extends AbstractTmdbApi {
     public static final String TMDB_METHOD_KEYWORDS = "keywords";
 
 
-    public static enum TvMethod {credits, external_ids, images, videos, recommendations, keywords, content_ratings}
+    public static enum TvMethod {credits, external_ids, images, videos, recommendations, keywords, content_ratings,alternative_titles}
 
 
     TmdbTV(TmdbApi tmdbApi) {
@@ -123,5 +127,12 @@ public class TmdbTV extends AbstractTmdbApi {
         apiUrl.addLanguage(language);
 
         return mapJsonResult(apiUrl, ContentRating.Results.class);
+    }
+
+    public List<AlternativeTitle> getAlternativeTitles(int seriesId, String language) {
+        ApiUrl apiUrl = new ApiUrl(TMDB_METHOD_TV, seriesId, TMDB_METHOD_CREDITS);
+
+        apiUrl.addLanguage(language);
+        return mapJsonResult(apiUrl, TvAlternativeTitle.class).getResults();
     }
 }
