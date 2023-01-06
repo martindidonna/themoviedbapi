@@ -28,7 +28,7 @@ public class TmdbTV extends AbstractTmdbApi {
     public static final String TMDB_METHOD_KEYWORDS = "keywords";
 
 
-    public static enum TvMethod {credits, external_ids, images, videos, recommendations, keywords, content_ratings,alternative_titles}
+    public static enum TvMethod {credits, external_ids, images, videos, recommendations, keywords, content_ratings, alternative_titles}
 
 
     TmdbTV(TmdbApi tmdbApi) {
@@ -130,7 +130,7 @@ public class TmdbTV extends AbstractTmdbApi {
     }
 
     public List<AlternativeTitle> getAlternativeTitles(int seriesId, String language) {
-        ApiUrl apiUrl = new ApiUrl(TMDB_METHOD_TV, seriesId, TMDB_METHOD_CREDITS);
+        ApiUrl apiUrl = new ApiUrl(TMDB_METHOD_TV, seriesId, TvMethod.alternative_titles);
 
         apiUrl.addLanguage(language);
         return mapJsonResult(apiUrl, TvAlternativeTitle.class).getResults();
